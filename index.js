@@ -17,9 +17,27 @@ let userCode
 let signUpCode
 let verifyCode
 
-mongoose.connect('mongodb+srv://nguyenkhangphuc2005:1231232312123@shoppingdb.b1a0wet.mongodb.net/?retryWrites=true&w=majority&appName=ShoppingDB')
-app.listen(5000, () => {
-    console.log("server is running")
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect("mongodb+srv://nguyenkhangphuc2005:1231232312123@shoppingdb.b1a0wet.mongodb.net/?retryWrites=true&w=majority&appName=ShoppingDB", {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            dbName: 'test'
+        });
+        console.log(conn.connection.host)
+    } catch (err) {
+        console.log(err)
+    }
+}
+connectDB().then(() => {
+    app.listen(5000, () => {
+        console.log("Server is running on port 3000")
+    })
+
+
+    // app.listen(3000, () => {
+    //     console.log("Server is running on port 3000")
+    // })
 })
 
 
